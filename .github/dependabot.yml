@@ -6,7 +6,7 @@ updates:
       prefix: "chore(devcontainer)"
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
 
   - package-ecosystem: github-actions
@@ -14,7 +14,7 @@ updates:
       prefix: "ci(github-actions)"
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       github-actions-security-updates:
@@ -37,7 +37,7 @@ updates:
     directories:
       - /dependencies
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       npm-security-updates:
@@ -78,7 +78,7 @@ updates:
       prefix: "deps(bundler)"
     directory: "/dependencies"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       bundler-security-updates:
@@ -95,7 +95,7 @@ updates:
       prefix: "deps(docker)"
     directory: "/"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       docker-security-updates:
@@ -145,7 +145,7 @@ updates:
     directories:
       - /dependencies/python/
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       pip-security-updates:
@@ -184,7 +184,7 @@ updates:
       - "/dependencies/google-java-format"
       - "/dependencies/ktlint"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       gradle-security-updates:
@@ -205,7 +205,7 @@ updates:
       prefix: "ci(dev-docker)"
     directory: "/dev-dependencies"
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       docker-dev-security-updates:
@@ -223,7 +223,7 @@ updates:
     directories:
       - /dev-dependencies
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       npm-dev-security-updates:
@@ -241,7 +241,7 @@ updates:
     directories:
       - dependencies/composer
     schedule:
-      interval: daily
+      interval: weekly
     open-pull-requests-limit: 100
     groups:
       composer-security-updates:
