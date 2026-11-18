@@ -18,13 +18,14 @@
 | MARKDOWN              | Pass ✅           |
 | MARKDOWN_PRETTIER     | Pass ✅           |
 | NATURAL_LANGUAGE      | Pass ✅           |
+| PYTHON_BLACK          | Pass ✅           |
+| PYTHON_ISORT          | Pass ✅           |
+| PYTHON_RUFF           | Pass ✅           |
+| PYTHON_RUFF_FORMAT    | Pass ✅           |
 | RUBY                  | Pass ✅           |
 | SHELL_SHFMT           | Pass ✅           |
 | SPELL_CODESPELL       | Pass ✅           |
 | YAML_PRETTIER         | Pass ✅           |
-
-<!-- markdownlint-enable MD060 -->
-<!-- textlint-enable terminology -->
 
 All files and directories linted successfully
 

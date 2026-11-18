@@ -6,3 +6,12 @@ misconfigurations:
     paths:
       - "Dockerfile"
       - "dev-dependencies/Dockerfile"
+
+# DOCUMENTED UNFIXABLE (fleet policy — same entry as scripts/npm-audit-exceptions.py):
+# CVE-2026-112366 (GHSA-fc5q-39xc-vjpf, picomatch ReDoS via single-branch
+# processing): affected range <= 4.0.7 and 4.0.7 is the LATEST published
+# release (verified 2026-11-17); there is no fixed version to upgrade to.
+# The copies live in dev-time glob matching inside bundled linters.
+# RE-CHECK: when picomatch publishes > 4.0.7, DELETE this entry and upgrade.
+vulnerabilities:
+  - id: CVE-2026-112366
