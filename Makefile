@@ -246,15 +246,16 @@ composer-audit: ## Run composer audit to check for known vulnerable dependencies
 		-c "composer audit"
 
 .PHONY: npm-audit
-npm-audit: ## Run npm audit to check for known vulnerable dependencies
+npm-audit: ## Run npm audit (documented-unfixable exceptions in scripts/npm_audit_exceptions.py)
 	docker run $(DOCKER_FLAGS) \
 		--entrypoint /bin/bash \
 		--rm \
 		-v "$(CURDIR)/dependencies/package-lock.json":/package-lock.json \
 		-v "$(CURDIR)/dependencies/package.json":/package.json \
+		-v "$(CURDIR)/scripts/npm_audit_exceptions.py":/npm_audit_exceptions.py \
 		--workdir / \
 		$(SUPER_LINTER_TEST_CONTAINER_URL) \
-		-c "npm audit"
+		-c "npm audit --json | python3 /npm_audit_exceptions.py"
 
 .PHONY: pip-audit
 pip-audit:  ## Run pip-audit to check for known vulnerable dependencies

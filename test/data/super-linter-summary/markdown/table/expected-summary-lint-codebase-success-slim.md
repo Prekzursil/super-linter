@@ -30,6 +30,13 @@
 | MARKDOWN_PRETTIER          | Pass ✅           |
 | NATURAL_LANGUAGE           | Pass ✅           |
 | PRE_COMMIT                 | Pass ✅           |
+| PYTHON_BLACK               | Pass ✅           |
+| PYTHON_PYLINT              | Pass ✅           |
+| PYTHON_FLAKE8              | Pass ✅           |
+| PYTHON_ISORT               | Pass ✅           |
+| PYTHON_MYPY                | Pass ✅           |
+| PYTHON_RUFF                | Pass ✅           |
+| PYTHON_RUFF_FORMAT         | Pass ✅           |
 | R                          | Pass ✅           |
 | RUBY                       | Pass ✅           |
 | SHELL_SHFMT                | Pass ✅           |
