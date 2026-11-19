@@ -53,14 +53,14 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           queries: security-extended,security-and-quality
-          # Narrow, transparent SARIF filter: the security-and-quality suite
-          # fires on the deliberately-bad linter TEST FIXTURES under
-          # test/linters/ (files named *_bad_*.js/.html that exist so the
-          # test suite can assert the linters catch them). First-party code
-          # (lib/, scripts/, .github/) stays fully scanned.
+          # Narrow, transparent SARIF filter: the entire test/ tree is
+          # upstream test harness and deliberately-bad linter fixtures
+          # (test/linters/*_bad_*.js/.html exist so the suite can assert
+          # the linters catch them; test/inspec holds the audit controls).
+          # First-party code (lib/, scripts/, .github/) stays fully scanned.
           config: |
             paths-ignore:
-              - test/linters
+              - test
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
