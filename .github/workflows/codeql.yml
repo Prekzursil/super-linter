@@ -29,20 +29,18 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - language: c-cpp
-            build-mode: none
-          - language: csharp
-            build-mode: none
-          - language: go
-          - language: java-kotlin
-            build-mode: none
-          - language: javascript-typescript
+          # Matrix = languages with FIRST-PARTY code. Verified by census
+          # (2026-11-19): first-party code is shell (lib/*.sh), one python
+          # script (scripts/npm_audit_exceptions.py), and these workflow
+          # files. Every other language in the repo exists only as the
+          # deliberately-bad linter fixtures under test/linters/ (excluded
+          # below as the transparent fixture filter) — scanning fixture
+          # languages yields findings on files designed to be broken, or
+          # fails extraction with "No source files found".
+          - language: actions
             build-mode: none
           - language: python
             build-mode: none
-          - language: ruby
-            build-mode: none
-          - language: rust
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -55,22 +53,14 @@ jobs:
           languages: ${{ matrix.language }}
           build-mode: ${{ matrix.build-mode }}
           queries: security-extended,security-and-quality
-
-      # Rust and Go have no single root build here (their projects are the
-      # linter test fixtures under test/linters/), and Go does not support
-      # build-mode: none — so build the fixture projects manually for
-      # extraction (manual build flow: init -> build -> analyze).
-      - name: Build Rust projects
-        if: matrix.language == 'rust'
-        run: |
-          cargo build --manifest-path test/linters/rust_clippy/bad/Cargo.toml
-          cargo build --manifest-path test/linters/rust_clippy/good/Cargo.toml
-
-      - name: Build Go modules
-        if: matrix.language == 'go'
-        run: |
-          (cd test/linters/go_modules/go_modules_good && go build ./...)
-          (cd test/linters/go_modules/go_modules_bad && go build ./...)
+          # Narrow, transparent SARIF filter: the security-and-quality suite
+          # fires on the deliberately-bad linter TEST FIXTURES under
+          # test/linters/ (files named *_bad_*.js/.html that exist so the
+          # test suite can assert the linters catch them). First-party code
+          # (lib/, scripts/, .github/) stays fully scanned.
+          config: |
+            paths-ignore:
+              - test/linters
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@33d7b85da1a04171e211befe2c739303b9a4c066 # v4.39.3
